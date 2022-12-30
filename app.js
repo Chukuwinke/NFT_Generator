@@ -1,6 +1,9 @@
+require("dotenv").config();
 const express = require("express")
 const uploadRoute = require("./src/api/routes/upload")
 const app = express();
+//const format = require('./src/api/services/processImage')
+
 
 app.use(uploadRoute);
 
