@@ -1,4 +1,4 @@
-const { S3Client, AbortMultipartUploadCommand, PutObjectCommand } = require("@aws-sdk/client-s3");
+ const { S3Client, AbortMultipartUploadCommand, PutObjectCommand } = require("@aws-sdk/client-s3");
 
 const bucketName = process.env.BUCKET_NAME
 const bucketRegion =process.env.BUCKET_REGION
