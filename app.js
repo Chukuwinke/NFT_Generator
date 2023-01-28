@@ -4,6 +4,7 @@ const cors = require('cors')
 const express = require("express")
 const uploadRoute = require("./src/api/routes/upload");
 const signupRoutes = require("./src/api/routes/signupRoutes");
+const loginRoutes = require("./src/api/routes/loginRoutes");
 //const { urlencoded } = require("express");
 const app = express();
 //const format = require('./src/api/services/processImage')
@@ -20,6 +21,7 @@ app.use(cookieParser())
 
 //Custom middlewares
 app.use('/api', signupRoutes);
+app.use('/api', loginRoutes);
 app.use(uploadRoute);
 
 app.listen(3000, ()=> console.log("listening on port 3000"));

@@ -1,23 +1,12 @@
-// bring in prisma 
 
-const prisma = require('../../../prisma/index')
+const credentianlCheck = require('../services/signupService')
 
 const cookieToken = require('../../utils/cookieToken')
 
 exports.signup = async(req, res) => {
+    const {name, email, password} = req.body
     try {
-        const {name, email, password} = req.body
-
-        if (!name || !email || !password){
-            throw new Error('please provide all fields')
-        }
-        const user = await prisma.user.create({
-            data:{
-                name,
-                email,
-                password,
-            }
-        })
+        const user = await credentianlCheck(name, email, password)
 
         // send user a token
         cookieToken(user, res)
