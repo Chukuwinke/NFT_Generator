@@ -29,6 +29,7 @@ model Project {
 model Layer {
   id        String @id @default(auto()) @map("_id") @db.ObjectId
   title     String
+  images    String[]
   project   Project   @relation(fields: [projectId], references: [id])
   projectId String @db.ObjectId
 }

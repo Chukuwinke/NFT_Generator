@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const {uploadAllImages, uploadMulter} = require("../controllers/upload")
+const {uploadAllImages} = require("../controllers/upload")
+const {uploadMulter} = require("../middlewares/uploadMiddleware")
+const {isLoggedIn} = require("../middlewares/isLoggedin")
 
-router.post("/upload", uploadMulter.array("file"), uploadAllImages);
+router.post("/upload", isLoggedIn, uploadMulter.array("file"), uploadAllImages);
 
 module.exports = router;    
 

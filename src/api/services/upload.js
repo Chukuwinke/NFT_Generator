@@ -1,5 +1,4 @@
 const fs = require("fs");
-const multer = require("multer");
 const uuid = require("uuid").v4;
 const {getFiles} =require("./web3Storage")
 const {s3UploadAll} = require("./s3Services")
@@ -21,10 +20,6 @@ const {s3UploadAll} = require("./s3Services")
 
 // })
 
-const storage = multer.memoryStorage()
-const uploadMulter = multer({storage});
-
-
 const imageDataprocess = async (req, res) =>{
     const {name} = req.body;
     const files = req.files;
@@ -34,10 +29,10 @@ const imageDataprocess = async (req, res) =>{
     const results = await s3UploadAll(name, files)
     //getFiles()
     //const layer = {[name]: files};
-    console.log(results);
+    //console.log(results);
     //console.log(files);
-    res.json({status : "success"});
-
+    //res.json({status : "success"});
+    return results;
 }
 
-module.exports = { imageDataprocess, uploadMulter }
+module.exports = { imageDataprocess}

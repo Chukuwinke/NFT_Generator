@@ -23,14 +23,24 @@ const s3UploadAll = async (name, files) =>{
     const params = files.map(file => {
         return {
             Bucket: bucketName,
+            // i need to find a way to store the key variables
             Key: `user/${name}/${file.originalname}`,
             Body: file.buffer,
             ContentType: file.mimetype,
         }
     })
-    return await Promise.all(
-        params.map(param => s3.send(new PutObjectCommand(param)))
+    const keys = []
+    const metaD = await Promise.all(
+        params.map(param => {
+            keys.push(param.Key)
+            return s3.send(new PutObjectCommand(param))
+        })
     )
+    return {
+        name,
+        keys,
+        metaD
+    }
     //const command = new PutObjectCommand(params)
     //await s3.send(command)
 }
